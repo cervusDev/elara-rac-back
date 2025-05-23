@@ -1,4 +1,8 @@
+import dotenv from 'dotenv';
+import { logger } from './logger';
 import express, { Request, Response } from 'express';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,5 +17,5 @@ app.get('/', (_req: Request, res: Response) => {
 
 // Inicialização
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+  logger.info('Servidor iniciado com sucesso!');
 });
