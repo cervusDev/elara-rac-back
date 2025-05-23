@@ -1,17 +1,17 @@
-import express from "express";
+import express, { Request, Response } from 'express';
 
-const PORT = 3000;
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Middleware para JSON
+// Middleware
 app.use(express.json());
 
-// Rota padrão
-app.get('/', (req, res) => {
-  res.send('Olá, mundo!');
+// Rotas
+app.get('/', (_req: Request, res: Response) => {
+  res.send('🌍 Olá, mundo com TypeScript!');
 });
 
-// Inicia o servidor
+// Inicialização
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
 });
