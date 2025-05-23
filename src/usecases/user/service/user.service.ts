@@ -1,10 +1,14 @@
 import { User } from '../entity';
-import { AppDataSource } from '../../../config/database';
+import { UserRepository } from '../repository/user.repository';
 
 export class UserService {
-  private userRepository = AppDataSource.getRepository(User);
+  private userRepository: UserRepository;
+
+  constructor() {
+    this.userRepository = new UserRepository();
+  }
 
   async listAll(): Promise<User[]> {
-    return this.userRepository.find();
+    return this.userRepository.findAll();
   }
 }
