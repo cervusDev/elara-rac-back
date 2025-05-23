@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
-import { logger } from './logger';
-import { User } from './entity';
-import { AppDataSource } from './data_source';
+import { logger } from './config/logger';
+import { User } from './usecases/user/entity';
+import { AppDataSource } from './config/database';
 import express, { Request, Response } from 'express';
 
 dotenv.config();
