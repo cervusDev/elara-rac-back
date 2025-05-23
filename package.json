@@ -7,15 +7,16 @@
     "start": "node dist/index.js",
     "build": "tsc",
     "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js",
-    "migration:generate": "npm run typeorm -- migration:generate -d src/data_source.ts src/migration/$npm_config_name",
-    "migration:run": "npm run typeorm -- migration:run -d src/data_source.ts",
-    "migration:revert": "npm run typeorm -- migration:revert -d src/data_source.ts"
+    "migration:generate": "npm run typeorm -- migration:generate -d src/config/database.ts src/migration/$npm_config_name",
+    "migration:run": "npm run typeorm -- migration:run -d src/config/database.ts",
+    "migration:revert": "npm run typeorm -- migration:revert -d src/config/database.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "body-parser": "^2.2.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "pg": "^8.16.0",
