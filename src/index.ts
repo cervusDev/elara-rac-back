@@ -1,5 +1,7 @@
 import dotenv from 'dotenv';
 import { logger } from './logger';
+import { User } from './entity';
+import { AppDataSource } from './data_source';
 import express, { Request, Response } from 'express';
 
 dotenv.config();
@@ -19,3 +21,21 @@ app.get('/', (_req: Request, res: Response) => {
 app.listen(PORT, () => {
   logger.info('Servidor iniciado com sucesso!');
 });
+
+AppDataSource.initialize()
+  .then(() => {
+    console.log('Conectado ao banco de dados');
+
+    // Rotas
+    app.get('/users', async (_req, res) => {
+      const users = await AppDataSource.getRepository(User).find();
+      res.json(users);
+    });
+
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando em http://localhost:${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('Erro ao conectar ao banco', error);
+  });
