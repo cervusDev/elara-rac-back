@@ -75,4 +75,121 @@ eventRouter.post("/event", authMiddleware, (req, res) => {
   eventController.create(req, res)
 });
 
+/**
+ * @swagger
+ * /events:
+ *   get:
+ *     summary: Lista todos os eventos
+ *     tags: [Eventos]
+ *     responses:
+ *       200:
+ *         description: Lista de eventos retornada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Event'
+ *       500:
+ *         description: Erro interno no servidor
+ */
+eventRouter.get("/events", authMiddleware, (req, res) => {
+  const eventController = new EventController();
+  eventController.findAll(req, res)
+})
+
+/**
+ * @swagger
+ * /events/filter:
+ *   get:
+ *     summary: Filtra eventos por ID, título ou data
+ *     tags: [Eventos]
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: false
+ *         description: ID do evento
+ *       - in: query
+ *         name: title
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Título do evento
+ *       - in: query
+ *         name: date
+ *         schema:
+ *           type: string
+ *           format: date
+ *         required: false
+ *         description: Data do evento
+ *     responses:
+ *       200:
+ *         description: Lista de eventos filtrados
+ *       401:
+ *         description: Não autorizado
+ *       500:
+ *         description: Erro interno do servidor
+ */
+
+eventRouter.get("/events/filter", authMiddleware, (req, res) => {
+  const eventController = new EventController();
+  eventController.listByFilter(req, res)
+});
+
+/**
+ * @swagger
+ * /events/{id}:
+ *   patch:
+ *     summary: Atualiza um evento
+ *     tags: [Eventos]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: ID do evento
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: Novo título
+ *               address:
+ *                 type: string
+ *                 example: Rua Atualizada, 123
+ *               date:
+ *                 type: string
+ *                 format: date
+ *                 example: 2025-06-10
+ *               time:
+ *                 type: string
+ *                 example: "14:00"
+ *               value:
+ *                 type: number
+ *                 example: 150
+ *               maxParticipants:
+ *                 type: number
+ *                 example: 50
+ *     responses:
+ *       200:
+ *         description: Evento atualizado com sucesso
+ *       400:
+ *         description: Requisição inválida
+ *       404:
+ *         description: Evento não encontrado
+ */
+eventRouter.patch('/events/:id', authMiddleware, (req, res) => {
+  const controller = new EventController();
+  controller.update(req, res);
+});
+
 export { eventRouter };

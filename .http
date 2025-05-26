@@ -1,3 +1,5 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODI4MzY4MywiZXhwIjoxNzQ4Mjk4MDgzfQ.BSe6XAbkUuVlHU_Yre-0XXYqxz0iwqgssU03pN579Zg
+
 ### Listagem de usuários
 GET http://localhost:3000/users
 
@@ -23,7 +25,7 @@ Content-Type: application/json
 ### Criar Evento com autenticação
 POST http://localhost:3000/event
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODI2ODk5MSwiZXhwIjoxNzQ4MjgzMzkxfQ.REH7mV_wNoH1d07nvMRUFcyzu966PEJUhuy8oRvy7vY
+Authorization: Bearer {{token}}
 
 {
   "title": "Festa de lançamento 3",
@@ -33,4 +35,24 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiO
   "time": "10:30",
   "value": 125.00,
   "maxParticipants": 30
+}
+
+### Listar todos os eventos
+GET http://localhost:3000/events
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### Listar todos os eventos com filtro
+GET http://localhost:3000/events/filter?id=1&title=Festa&date=2025-06-01
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### Atualizar evento
+PATCH http://localhost:3000/events/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Evento Atualizado com Sucesso",
+  "address": "Rua das Palmeiras, 999"
 }
