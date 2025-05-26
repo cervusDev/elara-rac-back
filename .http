@@ -1,0 +1,36 @@
+### Listagem de usuários
+GET http://localhost:3000/users
+
+### Criar usuário
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "name": "Bruno Oliveira",
+  "email": "bruno@example.com",
+  "passw": "senha123"
+}
+
+### Login
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
+  "email": "bruno@example.com",
+  "password": "senha123"
+}
+
+### Criar Evento com autenticação
+POST http://localhost:3000/event
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODI2ODk5MSwiZXhwIjoxNzQ4MjgzMzkxfQ.REH7mV_wNoH1d07nvMRUFcyzu966PEJUhuy8oRvy7vY
+
+{
+  "title": "Festa de lançamento 3",
+  "banner": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzLkvfogUHy3aUNxZaluj960QfL2cXlJ8Tag&s",
+  "address": "Odilon prado Cassetari 2707",
+  "date": "2025-06-01T19:00:00Z",
+  "time": "10:30",
+  "value": 125.00,
+  "maxParticipants": 30
+}

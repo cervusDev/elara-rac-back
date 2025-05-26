@@ -8,17 +8,20 @@ export class UserController {
   async list(_req: Request, res: Response): Promise<Response> {
     try {
       const users = await this.userService.listAll();
-
-      if (!users || users.length === 0) {
-        logger.error({ message: 'Nenhum usuário encontrado' })
-        return res.status(404).json({ message: 'Nenhum usuário encontrado' });
-      }
-
       return res.json(users);
-   
     } catch (error) {
       logger.error(error);
       return res.status(500).json({ message: 'Erro ao listar usuários' });
+    }
+  }
+
+  async create(req: Request, res: Response): Promise<Response> {
+    try {
+      const user = await this.userService.create(req.body);
+      return res.status(201).json(user);
+    } catch(error) {
+      logger.error(error);
+      return res.status(500).json({ message: 'Erro ao criar usuário' });
     }
   }
 }

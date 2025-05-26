@@ -1,15 +1,27 @@
-import { User } from '../entity';
+import { User } from '../entity/user.entity';
 import { Repository } from 'typeorm';
 import { AppDataSource } from '../../../config/database';
 
 export class UserRepository {
-  private repo: Repository<User>;
+  private repository: Repository<User>;
 
   constructor() {
-    this.repo = AppDataSource.getRepository(User);
+    this.repository = AppDataSource.getRepository(User);
   }
 
   async findAll(): Promise<User[]> {
-    return this.repo.find();
+    return this.repository.find();
+  }
+
+  async findByEmail({ email }: { email: string }): Promise<User | null> {
+    return this.repository.findOne({ where: { email }})
+  }
+
+  async create(data: User): Promise<User> {
+    return this.repository.create(data);
+  }
+
+  async save(user: User): Promise<User> {
+    return this.repository.save(user);
   }
 }
