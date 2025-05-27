@@ -17,6 +17,10 @@ export class UserRepository {
     return this.repository.findOne({ where: { email }})
   }
 
+  async findByCpf(cpf: string): Promise<User | null> {
+    return this.repository.findOne({ where: { cpf } })
+  }
+
   async create(data: User): Promise<User> {
     return this.repository.create(data);
   }

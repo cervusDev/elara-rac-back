@@ -21,7 +21,7 @@ POST http://localhost:3000/auth
 Content-Type: application/json
 
 {
-  "email": "bruno@example.com",
+  "cpf": "44524187839",
   "password": "senha123"
 }
 

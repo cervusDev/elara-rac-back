@@ -2,9 +2,10 @@ import dotenv from "dotenv";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { UserRepository } from '../../user/repository/user.repository';
+import { logger } from "../../../config/logger";
 
 interface LoginProps {
-  email: string;
+  cpf: string;
   password: string;
 }
 
@@ -17,13 +18,14 @@ export class AuthService {
     this.repository = new UserRepository();
   }
 
-  async login({ email, password }: LoginProps) {
-    const user = await this.repository.findByEmail({ email });
-
+  async login({ cpf, password }: LoginProps) {
+    const user = await this.repository.findByCpf(cpf);
+    
     if (!user) {
-      throw new Error('Email inválido.');
+      throw new Error('CPF inválido.');
     };
     
+    logger.error(JSON.stringify(user))
     const match = await bcrypt.compare(password, user.password);
     
     if (!match) {
