@@ -1,8 +1,8 @@
 import { ILike } from 'typeorm';
 import { Event } from "../entity/event.entity";
 import { instanceToPlain } from 'class-transformer';
+import { CreateEventDto } from "../entity/event.dto";
 import { EventRepository } from "../repository/event.repository";
-import { CreateEventDto, UpdateEventDto } from "../entity/event.dto";
 import { validateDeleteRequestParams } from "../../../abstracts/validateRequestBody";
 
 interface FilterProps {
