@@ -32,5 +32,5 @@ export class CreateEventDto {
   participants!: number;
 }
 
-export class UpdateEventDto extends CreateEventDto {}
+export class UpdateEventDto  {}
 

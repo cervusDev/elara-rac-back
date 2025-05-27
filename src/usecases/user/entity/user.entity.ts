@@ -28,7 +28,7 @@ export class User {
   address!: string;
 
   @Column({ length: 11, unique: true })
-  @IsNotEmpty({ message: 'Email é obrigatório' })
+  @IsNotEmpty({ message: 'Cpf é obrigatório' })
   cpf!: string;
 
   @Column({ length: 15 })

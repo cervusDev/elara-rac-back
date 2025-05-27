@@ -8,6 +8,9 @@ import { Event } from "../../events/entity/event.entity";
 type CreateProps = Partial<CreateTicketDto> & {
   event: Event,
   user: User
+  cpf: string,
+  phone: string,
+  address: string
 }
 
 export class TicketRepository {

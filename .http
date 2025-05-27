@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODM2OTY2MywiZXhwIjoxNzQ4Mzg0MDYzfQ.vcbe5dkoLOUPYVWATwmyI8yKTWrKJTo5eIjjKqanXqc
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODM3MjAwNSwiZXhwIjoxNzQ4Mzg2NDA1fQ.j2jXES7W7vy2cx6HRMtW4ECHyYmAPBlL-XLlNtjMtRM
 
 ### Listagem de usuários
 GET http://localhost:3000/users
@@ -10,7 +10,10 @@ Content-Type: application/json
 {
   "name": "Bruno Oliveira",
   "email": "bruno@example.com",
-  "password": "senha123"
+  "password": "senha123",
+  "address": "Vila Maria",
+  "cpf": "44524187839",
+  "phone": "14996285337"
 }
 
 ### Login
@@ -28,7 +31,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "title": "Festa de lançamento 5",
+  "title": "Festa de lançamento",
   "banner": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzLkvfogUHy3aUNxZaluj960QfL2cXlJ8Tag&s",
   "address": "Odilon prado Cassetari 2707",
   "date": "2025-07-07T19:00:00Z",
@@ -43,12 +46,12 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 ### Listar todos os eventos com filtro
-GET http://localhost:3000/events/filter?id=1&title=Festa&date=2025-06-01
+GET http://localhost:3000/events/filter?id=11&title=Festa&date=2025-06-01
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 ### Atualizar evento
-PATCH http://localhost:3000/events/1
+PATCH http://localhost:3000/events/11
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
@@ -58,11 +61,11 @@ Content-Type: application/json
 }
 
 ### Excluir evento por ID
-DELETE http://localhost:3000/events/1
+DELETE http://localhost:3000/events/11
 Authorization: Bearer {{token}}
 
 ### Buscar evento por ID
-GET http://localhost:3000/event/9
+GET http://localhost:3000/event/12
 Authorization: Bearer {{token}}
 
 ### Criar/Comprar um ingresso
@@ -71,6 +74,6 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "eventId": 10,
-  "userId": 2
+  "eventId": 12,
+  "userId": 3
 }

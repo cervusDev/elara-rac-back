@@ -1,4 +1,4 @@
-import { Ticket } from "../entity/ticket.entity";
+import { Ticket, TicketStatus } from "../entity/ticket.entity";
 import { CreateTicketDto } from "../entity/ticket.dto";
 import { TicketRepository } from "../repository/ticket.repository";
 import { UserRepository } from "../../user/repository/user.repository";
@@ -6,6 +6,7 @@ import { EventRepository } from "../../events/repository/event.repository";
 import { eventTimeout, limitTickesToSold, limitTicketsByCpf } from '../rules/ticket.rules';
 import { logger } from "../../../config/logger";
 import { User } from "../../user/entity/user.entity";
+import { EventService } from "../../events/service/event.service";
 
 interface findTicketByUserProps {
   used: Ticket[];
@@ -16,8 +17,10 @@ export class TicketService {
   private userRepository;
   private eventRepository;
   private ticketRepository;
+  private eventService;
 
   constructor() {
+    this.eventService = new EventService();
     this.userRepository = new UserRepository();
     this.eventRepository = new EventRepository();
     this.ticketRepository = new TicketRepository();
@@ -54,17 +57,23 @@ export class TicketService {
 
     if (!isAllowedBuyToTotalSold) {
       throw new Error('Limite de ingressos vendidos para este evento já foi atingido.');
-    }
+    };
 
-    logger.error(JSON.stringify(data))
+    const userToTicket = { ...user, password: 'null' };
     const createdTicket = await this.ticketRepository.create({
       ...data,
       event,
-      user: {
-        ...user,
-        password: 'null'
-      },
+      cpf: user.cpf,
+      phone: user.phone,
+      user: userToTicket,
+      address: event.address,
     });
+
+    const updateEvent = await this.eventService.update(event.id, { maxParticipants: event.maxParticipants - 1 })
+
+    if (!updateEvent) {
+      throw new Error("Não foi possível atualizar evento.");
+    };
 
     const ticket = await this.ticketRepository.save(createdTicket);
 

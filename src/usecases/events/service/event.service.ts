@@ -1,11 +1,10 @@
 import { ILike } from 'typeorm';
-import { ValidatorRules } from '../rules/events.rules';
 import { Event } from "../entity/event.entity";
 import { instanceToPlain } from 'class-transformer';
+import { ValidatorRules } from '../rules/events.rules';
 import { EventRepository } from "../repository/event.repository";
 import { CreateEventDto, UpdateEventDto } from "../entity/event.dto";
-import { validateDeleteRequestParams, validateUpdateRequestBody } from "../../../abstracts/validateRequestBody";
-import { logger } from '../../../config/logger';
+import { validateDeleteRequestParams } from "../../../abstracts/validateRequestBody";
 
 interface FilterProps {
   id?: number;
@@ -14,26 +13,22 @@ interface FilterProps {
 }
 
 export class EventService {
-  private validator;
   private eventRepository;
 
   constructor() {
-    this.validator = new ValidatorRules();
     this.eventRepository = new EventRepository();
   };
 
   async create(data: CreateEventDto): Promise<CreateEventDto> {
-    logger.error(data)
-    // await validateUpdateRequestBody({ dto: CreateEventDto, body: data });
     const event = await this.eventRepository.create(data);
     return this.eventRepository.save(event as Event);
   };
 
   async findAll(): Promise<Event[]> {
-   return this.eventRepository.repository
+  return this.eventRepository.repository
     .createQueryBuilder('event')
     .where(`
-      (event.date || 'T' || LPAD(event.time, 8, '0'))::timestamp > NOW()
+      (event.date::text || ' ' || event.time::text)::timestamp > NOW()
     `)
     .getMany();
   };
@@ -56,18 +51,26 @@ export class EventService {
     return this.eventRepository.findByWhere(where);
   };
 
-  async update(id: number, data: UpdateEventDto): Promise<UpdateEventDto> {
-    const event = await this.eventRepository.findById(id);
-
-    const { message, status } = await this.validator.updateValues(event);
-    
-    if (!status) {
-      throw new Error(message);
-    }
+  public async update(id: number, data: any): Promise<UpdateEventDto> {
+    const event = await this.eventRepository.findById(id) as Record<string, any>;
 
     if (!event) {
       throw new Error("Evento não encontrado.");
     };
+
+    const now = new Date();
+    const eventDateTime = new Date(`${event.date}T${event.time}`);
+
+    const alreadyOccurred = eventDateTime < now;
+
+    if (alreadyOccurred) {
+      const blockedFields = ['date', 'time', 'valor'];
+      for (const field of blockedFields) {
+        if (data[field] !== undefined && data[field] !== event[field]) {
+          throw new Error(`Não é permitido alterar o campo '${field}' de um evento que já ocorreu.`);
+        }
+      }
+    }
 
     const plainData = instanceToPlain(data);
     const filterData = Object.fromEntries(
