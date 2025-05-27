@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsDateString, IsNumber, IsPositive, Min, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsDateString, IsNumber, IsPositive, Min } from 'class-validator';
 
 export class CreateEventDto {
   @IsNotEmpty({ message: 'Título é obrigatório' })

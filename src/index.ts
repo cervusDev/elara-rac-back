@@ -9,7 +9,6 @@ import { swaggerSpec } from './config/swagger';
 import { AppDataSource } from "./config/database";
 import express, { Request, Response } from "express";
 
-// ROUTES IMPORTS
 import { healthRouter } from "./usecases/health/index";
 import { userRouter } from "./usecases/user/routes/user.routes";
 import { auhtRouter } from "./usecases/auth/routes/auth.routes";

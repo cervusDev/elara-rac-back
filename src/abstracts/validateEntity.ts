@@ -1,5 +1,5 @@
-import { validate } from 'class-validator';
 import { logger } from '../config/logger';
+import { validate } from 'class-validator';
 
 export async function validateEntity<T>(entity: T): Promise<void> {
   const errors = await validate(entity as object);

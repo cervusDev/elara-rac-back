@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { EventService } from "../service/event.service";
-import { UpdateEventDto } from "../entity/event.dto";
 import { logger } from "../../../config/logger";
+import { UpdateEventDto } from "../entity/event.dto";
+import { EventService } from "../service/event.service";
 
 export class EventController {
   private eventService;
@@ -66,6 +66,6 @@ export class EventController {
       return res.status(204).send();
     } catch (error: any) {
       return res.status(error.status || 500).json({ message: error.message || 'Erro interno do servidor' });
-    }
-  }
+    };
+  };
 };

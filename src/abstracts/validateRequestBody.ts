@@ -13,10 +13,10 @@ export async function validateUpdateRequestBody({ dto, body }: ValidateProps) {
 
   if (errors.length > 0) {
     throw new Error('Erro de validação');
-  }
+  };
 
   return dtoInstance;
-}
+};
 
 export async function validateDeleteRequestParams(event: any) {
   if (event.participants && event.participants > 0) {

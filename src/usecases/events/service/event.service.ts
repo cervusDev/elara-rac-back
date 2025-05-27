@@ -8,24 +8,22 @@ import { validateDeleteRequestParams, validateUpdateRequestBody } from "../../..
 
 interface FilterProps {
   id?: number;
-  title?: string;
   date?: string;
+  title?: string;
 }
 
 export class EventService {
-  private eventRepository;
   private validator;
+  private eventRepository;
 
   constructor() {
-    this.eventRepository = new EventRepository();
     this.validator = new ValidatorRules();
+    this.eventRepository = new EventRepository();
   };
 
   async create(data: CreateEventDto): Promise<CreateEventDto> {
     await validateUpdateRequestBody({ dto: CreateEventDto, body: data });
-    
     const event = await this.eventRepository.create(data);
-    
     return this.eventRepository.save(event as Event);
   };
 
