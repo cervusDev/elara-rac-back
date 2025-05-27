@@ -7,7 +7,7 @@ const ticketRouter = Router();
 /**
  * @swagger
  * tags:
- *   name: Tickets
+ *   name: Ingressos
  *   description: API para Tickets
  */
 /**

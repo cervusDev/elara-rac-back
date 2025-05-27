@@ -12,40 +12,6 @@ const userRouter = express.Router();
 
 /**
  * @swagger
- * /users:
- *   get:
- *     summary: Lista todos os usuários
- *     tags: [Usuários]
- *     responses:
- *       200:
- *         description: Lista de usuários retornada com sucesso
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                   name:
- *                     type: string
- *                   email:
- *                     type: string
- *                   password:
- *                     type: string
- *                   createdAt:
- *                     type: string
- *                     format: date-time
- */
-
-userRouter.get('/users', async (req, res) => {
-  const userController = new UserController();
-  await userController.list(req, res);
-});
-
-/**
- * @swagger
  * /user:
  *   post:
  *     summary: Cria um novo usuário

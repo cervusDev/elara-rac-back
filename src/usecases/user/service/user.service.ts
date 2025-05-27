@@ -15,16 +15,6 @@ export class UserService {
     this.userRepository = new UserRepository();
   }
 
-  async listAll(): Promise<User[]> {
-    const users = await this.userRepository.findAll();
-
-    if (!users) {
-      throw new Error("Erro na busca de usuário");
-    };
-    
-    return users;
-  }
-
   async create(data: User): Promise<CrateResponse> {
     const userExist = await this.userRepository.findByEmail({ email: data.email })
 
