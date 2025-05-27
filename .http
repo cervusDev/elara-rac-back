@@ -77,3 +77,8 @@ Authorization: Bearer {{token}}
   "eventId": 12,
   "userId": 3
 }
+
+### Listar ingressos por usuário
+GET http://localhost:3000/tickets/3
+Content-Type: application/json
+Authorization: Bearer {{token}}

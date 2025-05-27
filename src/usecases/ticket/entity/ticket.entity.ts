@@ -3,9 +3,9 @@ import { Event } from "../../events/entity/event.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export enum TicketStatus {
+  UTILIZADO = 'utilizado',
   DISPONIVEL = 'disponivel',
   INDISPONIVEL = 'indisponivel',
-  UTILIZADO = 'utilizado',
 }
 
 @Entity()

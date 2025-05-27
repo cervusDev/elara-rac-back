@@ -14,7 +14,7 @@ export class User {
   @IsNotEmpty({ message: 'Email é obrigatório' })
   email!: string;
 
-  @Column()
+  @Column({ select: false })
   @IsNotEmpty({ message: 'Senha é obrigatória' })
   password!: string;
 

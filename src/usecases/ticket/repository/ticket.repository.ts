@@ -8,9 +8,6 @@ import { Event } from "../../events/entity/event.entity";
 type CreateProps = Partial<CreateTicketDto> & {
   event: Event,
   user: User
-  cpf: string,
-  phone: string,
-  address: string
 }
 
 export class TicketRepository {
@@ -24,12 +21,12 @@ export class TicketRepository {
     return this.repository.find({ where: { cpf } })
   }
 
-async findByEvent(eventId: number): Promise<Ticket[]> {
-  return this.repository.find({
-    where: { event: { id: eventId } },
-    relations: ['event'],
-  });
-}
+  async findByEvent(eventId: number): Promise<Ticket[]> {
+    return this.repository.find({
+      where: { event: { id: eventId } },
+      relations: ['event'],
+    });
+  }
 
   async save(ticket: Ticket): Promise<Ticket> {
     return this.repository.save(ticket);

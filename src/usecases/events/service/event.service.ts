@@ -1,7 +1,6 @@
 import { ILike } from 'typeorm';
 import { Event } from "../entity/event.entity";
 import { instanceToPlain } from 'class-transformer';
-import { ValidatorRules } from '../rules/events.rules';
 import { EventRepository } from "../repository/event.repository";
 import { CreateEventDto, UpdateEventDto } from "../entity/event.dto";
 import { validateDeleteRequestParams } from "../../../abstracts/validateRequestBody";
