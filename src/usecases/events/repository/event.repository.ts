@@ -6,7 +6,7 @@ import { AppDataSource } from "../../../config/database";
 type FilterProps = FindOptionsWhere<Event> | FindOptionsWhere<Event>[];
 
 export class EventRepository {
-  private repository: Repository<Event>;
+  public repository: Repository<Event>;
 
   constructor() {
     this.repository = AppDataSource.getRepository(Event);

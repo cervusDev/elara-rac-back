@@ -28,7 +28,12 @@ export class EventService {
   };
 
   async findAll(): Promise<Event[]> {
-    return this.eventRepository.findAll();
+   return this.eventRepository.repository
+    .createQueryBuilder('event')
+    .where(`
+      (event.date || 'T' || LPAD(event.time, 8, '0'))::timestamp > NOW()
+    `)
+    .getMany();
   };
 
   async findByFilter(filters: FilterProps): Promise<Event[]> {
