@@ -1,6 +1,6 @@
 import { Event } from "../entity/event.entity";
 import { CreateEventDto } from "../entity/event.dto";
-import { FindOptionsWhere, Repository } from "typeorm";
+import { DeleteResult, FindOptionsWhere, Repository } from "typeorm";
 import { AppDataSource } from "../../../config/database";
 
 type FilterProps = FindOptionsWhere<Event> | FindOptionsWhere<Event>[];
@@ -34,5 +34,9 @@ export class EventRepository {
 
   async mergeData({ entity, filterData }: { entity: any, filterData: any }) {
     return this.repository.merge(entity, filterData)
+  };
+
+  async delete(id: number): Promise<any> {
+    return this.repository.delete(id)
   }
 };

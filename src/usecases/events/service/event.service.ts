@@ -4,7 +4,7 @@ import { Event } from "../entity/event.entity";
 import { instanceToPlain } from 'class-transformer';
 import { EventRepository } from "../repository/event.repository";
 import { CreateEventDto, UpdateEventDto } from "../entity/event.dto";
-import { validateRequestBody } from "../../../abstracts/validateRequestBody";
+import { validateDeleteRequestParams, validateUpdateRequestBody } from "../../../abstracts/validateRequestBody";
 
 interface FilterProps {
   id?: number;
@@ -22,7 +22,7 @@ export class EventService {
   };
 
   async create(data: CreateEventDto): Promise<CreateEventDto> {
-    await validateRequestBody({ dto: CreateEventDto, body: data });
+    await validateUpdateRequestBody({ dto: CreateEventDto, body: data });
     
     const event = await this.eventRepository.create(data);
     
@@ -72,4 +72,20 @@ export class EventService {
     const merge = await this.eventRepository.mergeData({ entity: event, filterData });
     return this.eventRepository.save(merge);
   }
+
+  async deleteEvent(id:number) {
+    const event = await this.eventRepository.findById(id);
+
+    if (!event) {
+      throw new Error('Evento não encontrado');
+    };
+
+    const validate = await validateDeleteRequestParams(event);
+
+    if (!validate) {
+      throw new Error('Não é possível excluir um evento com participantes');
+    };
+    
+    await this.eventRepository.delete(id);
+  };
 };

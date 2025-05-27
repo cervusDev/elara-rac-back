@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODI4MzY4MywiZXhwIjoxNzQ4Mjk4MDgzfQ.BSe6XAbkUuVlHU_Yre-0XXYqxz0iwqgssU03pN579Zg
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODMxOTM1NCwiZXhwIjoxNzQ4MzMzNzU0fQ.uP9qoMBY0yMBEWk91p4GX-UJrU4gmabA9Z9k1BbPqlM
 
 ### Listagem de usuários
 GET http://localhost:3000/users
@@ -56,3 +56,7 @@ Content-Type: application/json
   "title": "Evento Atualizado com Sucesso",
   "address": "Rua das Palmeiras, 999"
 }
+
+### Excluir evento por ID
+DELETE http://localhost:3000/events/1
+Authorization: Bearer {{token}}

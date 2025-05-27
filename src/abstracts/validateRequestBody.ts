@@ -6,7 +6,7 @@ interface ValidateProps {
   body: any;
 }
 
-export async function validateRequestBody({ dto, body }: ValidateProps) {
+export async function validateUpdateRequestBody({ dto, body }: ValidateProps) {
   const dtoInstance = plainToInstance(dto, body);
 
   const errors = await validate(dtoInstance);
@@ -17,3 +17,11 @@ export async function validateRequestBody({ dto, body }: ValidateProps) {
 
   return dtoInstance;
 }
+
+export async function validateDeleteRequestParams(event: any) {
+  if (event.participants && event.participants > 0) {
+    return false;
+  };
+
+  return true;
+};

@@ -27,9 +27,9 @@ export class CreateEventDto {
   @IsPositive({ message: 'Quantidade deve ser positiva' })
   maxParticipants!: number;
 
-  // @IsNumber({}, { message: 'Quantidade deve ser numérica' })
-  // @IsPositive({ message: 'Quantidade deve ser positiva' })
-  // participants!: number;
+  @IsNumber({}, { message: 'Quantidade deve ser numérica' })
+  @IsPositive({ message: 'Quantidade deve ser positiva' })
+  participants!: number;
 }
 
 export class UpdateEventDto extends CreateEventDto {}

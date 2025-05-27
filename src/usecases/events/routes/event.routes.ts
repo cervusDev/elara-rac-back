@@ -192,4 +192,34 @@ eventRouter.patch('/events/:id', authMiddleware, (req, res) => {
   controller.update(req, res);
 });
 
+/**
+ * @swagger
+ * /events/{id}:
+ *   delete:
+ *     summary: Exclui um evento
+ *     tags:
+ *       - Eventos
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do evento
+ *     responses:
+ *       204:
+ *         description: Evento excluído com sucesso
+ *       400:
+ *         description: Não é possível excluir evento com participantes
+ *       404:
+ *         description: Evento não encontrado
+ */
+
+eventRouter.delete('/events/:id', authMiddleware, (req, res) => {
+  const controller = new EventController();
+  controller.delete(req, res);
+});
+
 export { eventRouter };

@@ -23,9 +23,12 @@ export class Event {
   @Column('decimal', { precision: 10, scale: 2 })
   value!: number;
 
-  @Column('int')
+  @Column({ type: 'integer', default: 0, name: 'max_participants' })
   maxParticipants!: number;
 
-  @CreateDateColumn()
+  @Column({ type: 'integer', default: 0, name: 'number_of_participants' })
+  participants!: number;
+
+  @CreateDateColumn({ name: 'created_at' })
   createdAt!: Date;
 }
