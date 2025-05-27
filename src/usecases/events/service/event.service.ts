@@ -50,7 +50,7 @@ export class EventService {
     return this.eventRepository.findByWhere(where);
   };
 
-  public async update(id: number, data: any): Promise<UpdateEventDto> {
+  public async update(id: number, data: any): Promise<Event> {
     const event = await this.eventRepository.findById(id) as Record<string, any>;
 
     if (!event) {

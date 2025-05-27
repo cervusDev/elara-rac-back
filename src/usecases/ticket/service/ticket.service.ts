@@ -57,17 +57,22 @@ export class TicketService {
       throw new Error('Limite de ingressos vendidos para este evento já foi atingido.');
     };
 
+    const updatedDataEvent = { participants: event.participants + 1 };
+    const updateEvent = await this.eventService.update(event.id, updatedDataEvent);
+
+    if (!updateEvent) {
+      throw new Error("Não foi possível atualizar evento.");
+    };
+
+    if (updateEvent.participants >= updateEvent.maxParticipants) {
+      throw new Error("O evento atingiu o número máximo de participantes.");
+    };
+
     const createdTicket = await this.ticketRepository.create({
       ...data,
       user,
       event,
     });
-
-    const updateEvent = await this.eventService.update(event.id, { maxParticipants: event.maxParticipants - 1 })
-
-    if (!updateEvent) {
-      throw new Error("Não foi possível atualizar evento.");
-    };
 
     const ticket = await this.ticketRepository.save(createdTicket);
 
