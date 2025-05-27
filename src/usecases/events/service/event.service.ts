@@ -71,7 +71,7 @@ export class EventService {
     return this.eventRepository.save(merge);
   }
 
-  async deleteEvent(id:number) {
+  async deleteEvent(id:number): Promise<void> {
     const event = await this.eventRepository.findById(id);
 
     if (!event) {
@@ -86,4 +86,14 @@ export class EventService {
     
     await this.eventRepository.delete(id);
   };
+
+  async viewDetail(id:number): Promise<Event> {
+    const event = await this.eventRepository.findById(id);
+
+    if (!event) {
+      throw new Error(`Não foi possível encontrar o evento com id ${id}`);
+    };
+
+    return event;
+  }
 };

@@ -68,4 +68,14 @@ export class EventController {
       return res.status(error.status || 500).json({ message: error.message || 'Erro interno do servidor' });
     };
   };
+
+  async detail(req: Request, res: Response): Promise<Response> {
+    try {
+      const id = Number(req.params.id);
+      const event = await this.eventService.viewDetail(id);
+      return res.status(200).json(event);
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message || 'Erro interno do servidor.' });
+    };
+  }
 };

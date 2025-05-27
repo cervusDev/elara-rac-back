@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODMxOTM1NCwiZXhwIjoxNzQ4MzMzNzU0fQ.uP9qoMBY0yMBEWk91p4GX-UJrU4gmabA9Z9k1BbPqlM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODM1Mzc1MSwiZXhwIjoxNzQ4MzY4MTUxfQ.6N_f9vGdugz7mXaHstanZQ-XbzAp96RCxghzVGyhUoM
 
 ### Listagem de usuários
 GET http://localhost:3000/users
@@ -59,4 +59,8 @@ Content-Type: application/json
 
 ### Excluir evento por ID
 DELETE http://localhost:3000/events/1
+Authorization: Bearer {{token}}
+
+### Excluir evento por ID
+GET http://localhost:3000/event/2
 Authorization: Bearer {{token}}

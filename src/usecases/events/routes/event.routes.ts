@@ -69,7 +69,6 @@ const eventRouter = Router();
  *         description: Erro interno no servidor
  * 
  */
-
 eventRouter.post("/event", authMiddleware, (req, res) => {
   const eventController = new EventController();
   eventController.create(req, res)
@@ -132,7 +131,6 @@ eventRouter.get("/events", authMiddleware, (req, res) => {
  *       500:
  *         description: Erro interno do servidor
  */
-
 eventRouter.get("/events/filter", authMiddleware, (req, res) => {
   const eventController = new EventController();
   eventController.listByFilter(req, res)
@@ -216,10 +214,32 @@ eventRouter.patch('/events/:id', authMiddleware, (req, res) => {
  *       404:
  *         description: Evento não encontrado
  */
-
 eventRouter.delete('/events/:id', authMiddleware, (req, res) => {
   const controller = new EventController();
   controller.delete(req, res);
 });
+
+/**
+ * @swagger
+ * /event/{id}:
+ *   get:
+ *     summary: Lista um único evento para visualização dos detalhes
+ *     tags: [Eventos]
+ *     responses:
+ *       200:
+ *         description: Lista de um únicoe vento retornada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/Event'
+ *       500:
+ *         description: Erro interno no servidor
+ */
+eventRouter.get('/event/:id', authMiddleware, (req, res) => {
+  const controller = new EventController();
+  controller.detail(req, res);
+})
 
 export { eventRouter };
