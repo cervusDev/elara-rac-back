@@ -1,6 +1,6 @@
 import { User } from "../../user/entity/user.entity";
 import { Event } from "../../events/entity/event.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export enum TicketStatus {
   DISPONIVEL = 'disponivel',
@@ -23,9 +23,11 @@ export class Ticket {
   address!: string;
 
   @ManyToOne(() => Event, event => event.tickets, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'eventId' })
   event!: Event;
 
   @ManyToOne(() => User, user => user.tickets, { nullable: true })
+  @JoinColumn({ name: 'userId' })
   user!: User;
 
   @CreateDateColumn()

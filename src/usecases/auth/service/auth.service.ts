@@ -24,7 +24,7 @@ export class AuthService {
       throw new Error('Email inválido.');
     };
     
-    const match = await bcrypt.compare(password, user.passw);
+    const match = await bcrypt.compare(password, user.password);
     
     if (!match) {
       throw new Error('Senha inválida.');

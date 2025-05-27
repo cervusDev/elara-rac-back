@@ -32,7 +32,7 @@ const userRouter = express.Router();
  *                     type: string
  *                   email:
  *                     type: string
- *                   passw:
+ *                   password:
  *                     type: string
  *                   createdAt:
  *                     type: string
@@ -59,13 +59,13 @@ userRouter.get('/users', async (req, res) => {
  *             required:
  *               - name
  *               - email
- *               - passw
+ *               - password
  *             properties:
  *               name:
  *                 type: string
  *               email:
  *                 type: string
- *               passw:
+ *               password:
  *                 type: string
  *     responses:
  *       201:

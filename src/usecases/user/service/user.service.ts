@@ -32,8 +32,8 @@ export class UserService {
       throw new Error("Esse email já está em uso")
     }
 
-    const hash = await bcrypt.hash(data.passw, 12);
-    data.passw = hash;
+    const hash = await bcrypt.hash(data.password, 12);
+    data.password = hash;
     
     const newUser = await this.userRepository.create(data);
     await validateEntity(newUser);

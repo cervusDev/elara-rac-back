@@ -1,7 +1,14 @@
 import { Repository } from "typeorm";
 import { Ticket } from "../entity/ticket.entity";
-import { AppDataSource } from "../../../config/database";
+import { User } from "../../user/entity/user.entity";
 import { CreateTicketDto } from "../entity/ticket.dto";
+import { AppDataSource } from "../../../config/database";
+import { Event } from "../../events/entity/event.entity";
+
+type CreateProps = Partial<CreateTicketDto> & {
+  event: Event,
+  user: User
+}
 
 export class TicketRepository {
   private repository: Repository<Ticket>;
@@ -25,7 +32,14 @@ async findByEvent(eventId: number): Promise<Ticket[]> {
     return this.repository.save(ticket);
   }
 
-  async create(data: CreateTicketDto): Promise<Ticket> {
+  async create(data: CreateProps): Promise<Ticket> {
     return this.repository.create(data);
   };
+
+  async findByUserId(userId: number): Promise<Ticket[]> {
+    return this.repository.find({
+      where: { user: { id: userId } },
+      relations: ['event', 'user'],
+    });
+  }
 }

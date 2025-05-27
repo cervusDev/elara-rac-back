@@ -1,5 +1,5 @@
-import { Event } from "../../events/entity/event.entity";
 import { Ticket } from "../entity/ticket.entity";
+import { Event } from "../../events/entity/event.entity";
 
 export function limitTicketsByCpf(tickets: Ticket[]) {
   if (tickets.length >= 3) {
@@ -23,9 +23,5 @@ export function eventTimeout(event: Event) {
   const now = new Date();
   const eventDate = new Date(`${event.date}T${event.time}`);
 
-  if (eventDate < now) {
-    return false;
-  };
-
-  return false;
+  return eventDate > now;
 }

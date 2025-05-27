@@ -5,6 +5,7 @@ import { instanceToPlain } from 'class-transformer';
 import { EventRepository } from "../repository/event.repository";
 import { CreateEventDto, UpdateEventDto } from "../entity/event.dto";
 import { validateDeleteRequestParams, validateUpdateRequestBody } from "../../../abstracts/validateRequestBody";
+import { logger } from '../../../config/logger';
 
 interface FilterProps {
   id?: number;
@@ -22,7 +23,8 @@ export class EventService {
   };
 
   async create(data: CreateEventDto): Promise<CreateEventDto> {
-    await validateUpdateRequestBody({ dto: CreateEventDto, body: data });
+    logger.error(data)
+    // await validateUpdateRequestBody({ dto: CreateEventDto, body: data });
     const event = await this.eventRepository.create(data);
     return this.eventRepository.save(event as Event);
   };

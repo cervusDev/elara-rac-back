@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { logger } from "../../../config/logger";
 import { TicketService } from "../service/ticket.service";
 
 export class TicketController {
@@ -16,5 +15,16 @@ export class TicketController {
     } catch (error: any) {
       return res.status(400).json({ message: error.message || 'Erro interno do servidor.' });
     };
-  }
+  };
+
+  async findTicketsByUser(req: Request, res: Response): Promise<Response> {
+    try {
+      const userId = Number(req.params.userId);
+      const result = await this.ticketService.findTicketByUser(userId);
+
+      return res.status(200).json(result);
+    } catch (error: any) {
+      return res.status(500).json({ message: error.message });
+    };
+  };
 };

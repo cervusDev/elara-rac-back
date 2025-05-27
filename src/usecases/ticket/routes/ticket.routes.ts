@@ -64,6 +64,42 @@ const ticketRouter = Router();
 ticketRouter.post('/ticket', authMiddleware, (req, res) => {
   const controller = new TicketController();
   controller.create(req, res);
-})
+});
+
+/**
+ * @swagger
+ * /tickets/{userId}:
+ *   get:
+ *     summary: Lista todos os ingressos comprados por um usuário
+ *     tags: [Ingressos]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID do usuário
+ *     responses:
+ *       200:
+ *         description: Lista de ingressos divididos em disponíveis e utilizados
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 available:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Ticket'
+ *                 used:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Ticket'
+ */
+ticketRouter.get('/tickets/:userId', authMiddleware, (req, res) => {
+  const controller = new TicketController();
+  controller.findTicketsByUser(req, res);
+});
+
 
 export { ticketRouter };

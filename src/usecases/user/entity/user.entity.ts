@@ -16,11 +16,21 @@ export class User {
 
   @Column()
   @IsNotEmpty({ message: 'Senha é obrigatória' })
-  passw!: string;
+  password!: string;
 
   @CreateDateColumn()
   createdAt!: Date;
 
   @OneToMany(() => Ticket, ticket => ticket.user)
   tickets!: Ticket[];
+
+  @Column()
+  address!: string;
+
+  @Column({ length: 11, unique: true })
+  @IsNotEmpty({ message: 'Email é obrigatório' })
+  cpf!: string;
+
+  @Column({ length: 15 })
+  phone!: string;
 }

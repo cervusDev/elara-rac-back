@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODM1Mzc1MSwiZXhwIjoxNzQ4MzY4MTUxfQ.6N_f9vGdugz7mXaHstanZQ-XbzAp96RCxghzVGyhUoM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODM2OTY2MywiZXhwIjoxNzQ4Mzg0MDYzfQ.vcbe5dkoLOUPYVWATwmyI8yKTWrKJTo5eIjjKqanXqc
 
 ### Listagem de usuários
 GET http://localhost:3000/users
@@ -10,7 +10,7 @@ Content-Type: application/json
 {
   "name": "Bruno Oliveira",
   "email": "bruno@example.com",
-  "passw": "senha123"
+  "password": "senha123"
 }
 
 ### Login
@@ -28,10 +28,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "title": "Festa de lançamento 3",
+  "title": "Festa de lançamento 5",
   "banner": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzLkvfogUHy3aUNxZaluj960QfL2cXlJ8Tag&s",
   "address": "Odilon prado Cassetari 2707",
-  "date": "2025-06-01T19:00:00Z",
+  "date": "2025-07-07T19:00:00Z",
   "time": "10:30",
   "value": 125.00,
   "maxParticipants": 30
@@ -61,6 +61,16 @@ Content-Type: application/json
 DELETE http://localhost:3000/events/1
 Authorization: Bearer {{token}}
 
-### Excluir evento por ID
-GET http://localhost:3000/event/2
+### Buscar evento por ID
+GET http://localhost:3000/event/9
 Authorization: Bearer {{token}}
+
+### Criar/Comprar um ingresso
+POST http://localhost:3000/ticket
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "eventId": 10,
+  "userId": 2
+}
