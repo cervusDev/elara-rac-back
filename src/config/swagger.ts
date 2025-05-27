@@ -17,7 +17,8 @@ export const swaggerOptions = {
   apis: [
     'src/usecases/user/routes/*.ts',
     'src/usecases/auth/routes/*.ts',
-    'src/usecases/events/routes/*.ts'
+    'src/usecases/events/routes/*.ts',
+    'src/usecases/ticket/routes/*.ts',
   ]
 };
 

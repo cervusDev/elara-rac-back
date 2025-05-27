@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Ticket } from '../../ticket/entity/ticket.entity';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Event {
@@ -26,9 +27,12 @@ export class Event {
   @Column({ type: 'integer', default: 0, name: 'max_participants' })
   maxParticipants!: number;
 
-  @Column({ type: 'integer', default: 0, name: 'number_of_participants' })
+  @Column({ type: 'integer', default: 0 })
   participants!: number;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt!: Date;
+
+  @OneToMany(() => Ticket, ticket => ticket.event)
+  tickets!: Ticket[];
 }

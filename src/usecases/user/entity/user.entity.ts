@@ -1,5 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Ticket } from '../../ticket/entity/ticket.entity';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -19,4 +20,7 @@ export class User {
 
   @CreateDateColumn()
   createdAt!: Date;
+
+  @OneToMany(() => Ticket, ticket => ticket.user)
+  tickets!: Ticket[];
 }

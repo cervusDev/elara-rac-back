@@ -1,5 +1,5 @@
 import { ILike } from 'typeorm';
-import { ValidatorRules } from '../rules';
+import { ValidatorRules } from '../rules/events.rules';
 import { Event } from "../entity/event.entity";
 import { instanceToPlain } from 'class-transformer';
 import { EventRepository } from "../repository/event.repository";

@@ -13,6 +13,7 @@ import { healthRouter } from "./usecases/health/index";
 import { userRouter } from "./usecases/user/routes/user.routes";
 import { auhtRouter } from "./usecases/auth/routes/auth.routes";
 import { eventRouter } from "./usecases/events/routes/event.routes";
+import { ticketRouter } from "./usecases/ticket/routes/ticket.routes";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use(userRouter);
 app.use(auhtRouter);
 app.use(eventRouter);
 app.use(healthRouter);
+app.use(ticketRouter);
 
 AppDataSource.initialize().then(async () => {
   logger.info("Conectado ao banco de dados");
