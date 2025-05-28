@@ -16,12 +16,6 @@ export class Ticket {
   @Column({ length: 11, nullable: true })
   cpf!: string;
 
-  @Column({ length: 15, nullable: true })
-  phone!: string;
-
-  @Column({ nullable: true })
-  address!: string;
-
   @ManyToOne(() => Event, event => event.tickets, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'eventId' })
   event!: Event;

@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { logger } from "../../../config/logger";
 import { UpdateEventDto } from "../entity/event.dto";
 import { EventService } from "../service/event.service";
 

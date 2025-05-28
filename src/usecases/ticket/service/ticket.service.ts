@@ -73,16 +73,14 @@ export class TicketService {
       throw new Error("O evento atingiu o número máximo de participantes.");
     };
 
-    Array.from({ length: data.numberOfTickets }).map(async () => {
-      const createdTicket = await this.ticketRepository.create({
-        ...data,
-        user,
-        event,
-      });
+    const payload = { ...data, cpf: user.cpf, user, event };
+    const arrayFrom = Array.from({ length: data.numberOfTickets }).map(async () => {});
+    arrayFrom.forEach(async () => {
+      const createdTicket = await this.ticketRepository.create(payload);
   
       await this.ticketRepository.save(createdTicket);
     })
-
+    
 
     return {} as Ticket;
   };

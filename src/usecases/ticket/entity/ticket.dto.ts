@@ -1,8 +1,8 @@
 import {
+  Max,
   Min,
   IsInt,
   IsNotEmpty,
-  Max,
 } from 'class-validator';
 
 export class CreateTicketDto {
