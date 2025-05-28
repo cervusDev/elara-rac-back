@@ -25,6 +25,11 @@ export class TicketService {
   };
 
   async create(data: CreateTicketDto): Promise<Ticket> {
+    if (data.numberOfTickets > 3) {
+      throw new Error("Não é possível comprar mais de 3 ingressos")
+    };
+
+
     const user = await this.userRepository.findById(+data.userId);
 
     if (!user) {
@@ -68,15 +73,18 @@ export class TicketService {
       throw new Error("O evento atingiu o número máximo de participantes.");
     };
 
-    const createdTicket = await this.ticketRepository.create({
-      ...data,
-      user,
-      event,
-    });
+    Array.from({ length: data.numberOfTickets }).map(async () => {
+      const createdTicket = await this.ticketRepository.create({
+        ...data,
+        user,
+        event,
+      });
+  
+      await this.ticketRepository.save(createdTicket);
+    })
 
-    const ticket = await this.ticketRepository.save(createdTicket);
 
-    return ticket;
+    return {} as Ticket;
   };
 
   async findTicketByUser(userId: number): Promise<findTicketByUserProps> {

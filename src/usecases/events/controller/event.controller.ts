@@ -58,8 +58,6 @@ export class EventController {
   };
 
   async delete(req: Request, res: Response): Promise<Response> {
-    logger.error(req.params.id);
-
     try {
       const id = Number(req.params.id);
       await this.eventService.deleteEvent(id);

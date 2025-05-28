@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODM3MjAwNSwiZXhwIjoxNzQ4Mzg2NDA1fQ.j2jXES7W7vy2cx6HRMtW4ECHyYmAPBlL-XLlNtjMtRM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJicnVub0BleGFtcGxlLmNvbSIsIm5hbWUiOiJCcnVubyBPbGl2ZWlyYSIsImlhdCI6MTc0ODQ2NTA5NCwiZXhwIjoxNzQ4NDc5NDk0fQ.Ff1w7anWvL6ll_zl03d3av4i-nJT_GrhSGj3orB6l1g
 
 ### Listagem de usuários
 GET http://localhost:3000/users
@@ -75,7 +75,8 @@ Authorization: Bearer {{token}}
 
 {
   "eventId": 12,
-  "userId": 3
+  "userId": 3,
+  "numberOfTickets": 3
 }
 
 ### Listar ingressos por usuário

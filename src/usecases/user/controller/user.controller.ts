@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { logger } from '../../../config/logger';
 import { UserService } from '../service/user.service';
 
 export class UserController {
@@ -10,7 +9,6 @@ export class UserController {
       const user = await this.userService.create(req.body);
       return res.status(201).json(user);
     } catch(error) {
-      logger.error(error);
       return res.status(500).json({ message: 'Erro ao criar usuário' });
     }
   }

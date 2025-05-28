@@ -1,10 +1,7 @@
-import { logger } from '../config/logger';
 import { validate } from 'class-validator';
 
 export async function validateEntity<T>(entity: T): Promise<void> {
   const errors = await validate(entity as object);
-
-  logger.error(JSON.stringify(errors));
 
   if (errors.length > 0) {
     const messages = errors

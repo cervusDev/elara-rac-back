@@ -13,13 +13,13 @@ export class Ticket {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Column({ length: 11 })
+  @Column({ length: 11, nullable: true })
   cpf!: string;
 
-  @Column({ length: 15 })
+  @Column({ length: 15, nullable: true })
   phone!: string;
 
-  @Column()
+  @Column({ nullable: true })
   address!: string;
 
   @ManyToOne(() => Event, event => event.tickets, { onDelete: 'CASCADE' })

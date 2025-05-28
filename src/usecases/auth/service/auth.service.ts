@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { UserRepository } from '../../user/repository/user.repository';
-import { logger } from "../../../config/logger";
 
 interface LoginProps {
   cpf: string;
@@ -25,14 +24,19 @@ export class AuthService {
       throw new Error('CPF inválido.');
     };
     
-    logger.error(JSON.stringify(user))
     const match = await bcrypt.compare(password, user.password);
     
     if (!match) {
       throw new Error('Senha inválida.');
     };
     
-    const userToken = { id: user.id, email: user.email, name: user.name };
+    const userToken = { 
+      id: user.id, 
+      cpf: user.cpf,
+      name: user.name, 
+      email: user.email, 
+      phone: user.phone,
+    };
     const token = jwt.sign(userToken, process.env.JWT_SECRET as string, { expiresIn: '4h' });
     
     return {

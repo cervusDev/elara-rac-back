@@ -1,9 +1,6 @@
-import { logger } from "../../../config/logger";
-
 export class ValidatorRules {
   async updateValues(data: any) {
     const now = new Date();
-    logger.error(data.date)
     if (!data.date || !data.time) {
       return {
         status: true,
