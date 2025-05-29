@@ -17,8 +17,16 @@ export class TicketRepository {
     this.repository = AppDataSource.getRepository(Ticket);
   }
 
-  async findByCpf(cpf: string): Promise<Ticket[]> {
-    return this.repository.find({ where: { cpf } })
+  async findByCpf(cpf: string, eventId: number): Promise<Ticket[]> {
+    return this.repository.find({
+      where: {
+        cpf,
+        event: {
+          id: eventId
+        }
+      },
+      relations: ['event']
+    })
   }
 
   async findByEvent(eventId: number): Promise<Ticket[]> {

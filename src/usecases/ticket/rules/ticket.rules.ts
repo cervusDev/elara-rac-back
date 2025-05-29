@@ -1,8 +1,10 @@
 import { Ticket } from "../entity/ticket.entity";
 import { Event } from "../../events/entity/event.entity";
 
-export function limitTicketsByCpf(tickets: Ticket[]) {
-  if (tickets.length >= 3) {
+export function limitTicketsByCpf(tickets: Ticket[], numberOfTickets: number) {
+  const totalOfTickest = (tickets.length - 1) + numberOfTickets;
+
+  if (totalOfTickest > 3) {
     return false;
   };
 
