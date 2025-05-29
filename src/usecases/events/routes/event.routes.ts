@@ -185,7 +185,7 @@ eventRouter.get("/events/filter", authMiddleware, (req, res) => {
  *       404:
  *         description: Evento não encontrado
  */
-eventRouter.patch('/events/:id', authMiddleware, (req, res) => {
+eventRouter.patch('/event/:id', authMiddleware, (req, res) => {
   const controller = new EventController();
   controller.update(req, res);
 });
@@ -214,7 +214,7 @@ eventRouter.patch('/events/:id', authMiddleware, (req, res) => {
  *       404:
  *         description: Evento não encontrado
  */
-eventRouter.delete('/events/:id', authMiddleware, (req, res) => {
+eventRouter.delete('/event/:id', authMiddleware, (req, res) => {
   const controller = new EventController();
   controller.delete(req, res);
 });

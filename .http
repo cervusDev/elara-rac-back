@@ -61,7 +61,7 @@ Content-Type: application/json
 }
 
 ### Excluir evento por ID
-DELETE http://localhost:3000/events/11
+DELETE http://localhost:3000/event/11
 Authorization: Bearer {{token}}
 
 ### Buscar evento por ID
