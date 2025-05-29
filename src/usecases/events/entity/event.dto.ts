@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsDateString, IsNumber, IsPositive, Min } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsDateString, IsNumber, IsPositive, Min, isNumber } from 'class-validator';
 
 export class CreateEventDto {
   @IsNotEmpty({ message: 'Título é obrigatório' })
@@ -30,6 +30,16 @@ export class CreateEventDto {
   @IsNumber({}, { message: 'Quantidade deve ser numérica' })
   @IsPositive({ message: 'Quantidade deve ser positiva' })
   participants!: number;
+}
+
+export class FilterEventDto {
+  @IsNumber({}, { message: 'Valor deve ser numérico' })
+  @IsPositive({ message: 'Quantidade deve ser positiva' })
+    @IsNotEmpty({ message: 'Valor é obrigatório' })
+  id?: number;
+  
+  date?: string;
+  title?: string;
 }
 
 export class UpdateEventDto  {}

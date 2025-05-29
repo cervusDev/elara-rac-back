@@ -24,19 +24,23 @@ export class EventService {
   };
 
   async findAll(): Promise<Event[]> {
-  return this.eventRepository.repository
-    .createQueryBuilder('event')
-    .where(`
+    return this.eventRepository.repository
+      .createQueryBuilder('event')
+      .where(`
       (event.date::text || ' ' || event.time::text)::timestamp > NOW()
     `)
-    .getMany();
+      .getMany();
   };
 
   async findByFilter(filters: FilterProps): Promise<Event[]> {
     const where: any = {};
 
-    if (filters.id) {
-      where.id = filters.id;
+    if (filters.id !== undefined && filters.id !== null) {
+      const parsedId = Number(filters.id);
+      if (Number.isNaN(parsedId)) {
+        throw new Error("O campo 'id' deve ser um número válido.");
+      }
+      where.id = parsedId;
     }
 
     if (filters.title) {
@@ -46,6 +50,12 @@ export class EventService {
     if (filters.date) {
       where.date = filters.date;
     }
+
+
+    if (Object.keys(where).length === 0) {
+      return this.eventRepository.findAll();
+    }
+
 
     return this.eventRepository.findByWhere(where);
   };
@@ -80,7 +90,7 @@ export class EventService {
     return this.eventRepository.save(merge);
   }
 
-  async deleteEvent(id:number): Promise<void> {
+  async deleteEvent(id: number): Promise<void> {
     const event = await this.eventRepository.findById(id);
 
     if (!event) {
@@ -92,11 +102,11 @@ export class EventService {
     if (!validate) {
       throw new Error('Não é possível excluir um evento com participantes');
     };
-    
+
     await this.eventRepository.delete(id);
   };
 
-  async viewDetail(id:number): Promise<Event> {
+  async viewDetail(id: number): Promise<Event> {
     const event = await this.eventRepository.findById(id);
 
     if (!event) {
