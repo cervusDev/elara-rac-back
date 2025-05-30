@@ -13,11 +13,11 @@ export class EventRepository {
   };
 
   async findAll(): Promise<Event[]> {
-    return this.repository.find();
+    return this.repository.find({ order: { date: 'DESC' } });
   };
 
   async findByWhere(where: FilterProps) {
-    return this.repository.findBy(where);
+    return this.repository.find({ where, order: { date: 'DESC' } });
   };
 
   async delete(id: number): Promise<any> {
