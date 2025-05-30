@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: express-backend
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+volumes:
+  pgdata:
