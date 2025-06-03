@@ -10,7 +10,7 @@ export const swaggerOptions = {
     },
     servers: [
       {
-        url: 'https://elara-rac-back-production.up.railway.app',
+        url: 'http://localhost:3333',
       },
     ],
   },
